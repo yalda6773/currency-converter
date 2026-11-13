@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffebee;
+            border-radius: 8px;
+            color: #c62828;
+        }
+        .footer {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>💱 Currency Converter</h2>
+        
+        <form method="POST">
+            <input type="number" step="any" name="amount" placeholder="Enter amount..." value="{{ amount }}" required>
+            
+            <div class="row">
+                <select name="from_currency">
+                    <option value="USD" {% if from_currency == 'USD' %}selected{% endif %}>USD - US Dollar</option>
+                    <option value="EUR" {% if from_currency == 'EUR' %}selected{% endif %}>EUR - Euro</option>
+                    <option value="GBP" {% if from_currency == 'GBP' %}selected{% endif %}>GBP - British Pound</option>
+                    <option value="JPY" {% if from_currency == 'JPY' %}selected{% endif %}>JPY - Japanese Yen</option>
+                    <option value="TRY" {% if from_currency == 'TRY' %}selected{% endif %}>TRY - Turkish Lira</option>
+                    <option value="AED" {% if from_currency == 'AED' %}selected{% endif %}>AED - UAE Dirham</option>
+                    <option value="CAD" {% if from_currency == 'CAD' %}selected{% endif %}>CAD - Canadian Dollar</option>
+                    <option value="AUD" {% if from_currency == 'AUD' %}selected{% endif %}>AUD - Australian Dollar</option>
+                </select>
+
+                <select name="to_currency">
+                    <option value="EUR" {% if to_currency == 'EUR' %}selected{% endif %}>EUR - Euro</option>
+                    <option value="USD" {% if to_currency == 'USD' %}selected{% endif %}>USD - US Dollar</option>
+                    <option value="GBP" {% if to_currency == 'GBP' %}selected{% endif %}>GBP - British Pound</option>
+                    <option value="JPY" {% if to_currency == 'JPY' %}selected{% endif %}>JPY - Japanese Yen</option>
+                    <option value="TRY" {% if to_currency == 'TRY' %}selected{% endif %}>TRY - Turkish Lira</option>
+                    <option value="AED" {% if to_currency == 'AED' %}selected{% endif %}>AED - UAE Dirham</option>
+                    <option value="CAD" {% if to_currency == 'CAD' %}selected{% endif %}>CAD - Canadian Dollar</option>
+                    <option value="AUD" {% if to_currency == 'AUD' %}selected{% endif %}>AUD - Australian Dollar</option>
+                </select>
+            </div>
+
+            <button type="submit">Convert</button>
+        </form>
+
+        {% if converted_amount is not none %}
+        <div class="result">
+            Converted Amount: {{ converted_amount }} {{ to_currency }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <p>Developed by <strong>Yalda Ghaedi</strong></p>
+        <p>Student ID: <strong>2259990359</strong></p>
+    </div>
+
+</body>
+</html>
